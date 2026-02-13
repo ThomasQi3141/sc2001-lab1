@@ -1,4 +1,5 @@
-from typing import List
+from typing import List, Optional
+import random
 
 # Insertion sort implementation -> returns # comparisons
 
@@ -109,3 +110,7 @@ def hybrid_mergesort(arr: List[int], start: int, end: int, threshold: int) -> in
     comparisons += merge(arr, start, end)
     return comparisons
 
+# function for generating random testing data
+def generate_random_array(size: int, x: int, seed: Optional[int] = None) -> List[int]:
+    rng = random.Random(seed)
+    return [rng.randint(1, x) for _ in range(size)]
