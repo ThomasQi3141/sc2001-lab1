@@ -5,9 +5,7 @@ import heapq
 import matplotlib.pyplot as plt
 import numpy as np
 
-# ==========================================
-# 1. Dijkstra's Algorithm Implementation
-# ==========================================
+
 def dijkstra_list_heap(graph, src):
     V = len(graph)
     
@@ -22,8 +20,7 @@ def dijkstra_list_heap(graph, src):
     pq = [(0, src)]
 
     while pq:
-        # --- EXTRACT MINIMUM (Min-Heap Priority Queue) ---
-        # Pop the vertex with the absolute minimum distance in O(log V) time
+       
         min_dist, u = heapq.heappop(pq)
         
         # If the vertex is already finalized, ignore it (lazy deletion)
@@ -33,7 +30,7 @@ def dijkstra_list_heap(graph, src):
         # Mark the chosen vertex as finalized
         visited[u] = True
 
-        # --- RELAXATION (Adjacency List) ---
+        
         # Update distance value of the adjacent vertices of the picked vertex.
         for v, weight in graph[u]:
             # Update dist[v] only if:
@@ -47,9 +44,7 @@ def dijkstra_list_heap(graph, src):
 
     return dist
 
-# ==========================================
-# 2. Helper: Generate Random Graph
-# ==========================================
+
 def generate_random_graph_list(V, edge_probability=0.5):
     """Generates a random adjacency list."""
     graph = [[] for _ in range(V)]
@@ -60,9 +55,7 @@ def generate_random_graph_list(V, edge_probability=0.5):
                 graph[i].append((j, weight))
     return graph
 
-# ==========================================
-# 3. Empirical Analysis / Timing Script
-# ==========================================
+
 def empirical_analysis():
     print(f"{'Vertices (|V|)':<15} | {'Edges (~|E|)':<15} | {'Time (Seconds)':<15}")
     print("-" * 50)
@@ -74,7 +67,7 @@ def empirical_analysis():
         # Keep density at 50% so |E| is roughly 0.5 * V * (V-1)
         graph = generate_random_graph_list(V, 0.5) 
         
-        # Calculate exact number of edges for printing
+       
         E = sum(len(adj) for adj in graph)
         
         # Measure execution time
@@ -85,9 +78,7 @@ def empirical_analysis():
         execution_time = end_time - start_time
         print(f"{V:<15} | {E:<15} | {execution_time:.6f}")
 
-# ==========================================
-# 4. Plotting: Runtime vs Vertices (|V|)
-# ==========================================
+
 def plot_runtime_vs_vertices():
     print("\nGenerating Plot 1: Runtime vs Vertices...")
     
@@ -118,13 +109,9 @@ def plot_runtime_vs_vertices():
     plt.title('Dijkstra Part (b): Runtime vs Vertices (Density = 50%)', fontsize=14)
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
-    
-    # This command opens the window displaying the graph
     plt.show()
 
-# ==========================================
-# 5. Plotting: Runtime vs Edges (|E|)
-# ==========================================
+
 def plot_runtime_vs_edges():
     print("\nGenerating Plot 2: Runtime vs Edges...")
     
@@ -162,13 +149,9 @@ def plot_runtime_vs_edges():
     plt.title('Dijkstra Part (b): Runtime vs Edges (Fixed Vertices)', fontsize=14)
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
-    
-    # This command opens the window displaying the graph
     plt.show()
 
-# ==========================================
-# Script Execution
-# ==========================================
+
 if __name__ == "__main__":
     # 1. Print the raw data table
     empirical_analysis()
